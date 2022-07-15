@@ -1,7 +1,9 @@
 package com.example.mymatters.mymattersdatabase
 
-class MyMattersDatabase{
-    fun AddInFamily(){
+data class Person(val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
 
+class MyMattersDatabase{
+    fun AddInFamily(person: Person){
+        
     }
 }
