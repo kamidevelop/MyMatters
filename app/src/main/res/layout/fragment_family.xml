@@ -25,11 +25,13 @@
                 android:background="@color/shadow_white"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardView"
                     android:layout_width="356dp"
                     android:layout_height="170dp"
                     app:cardCornerRadius="10dp"
+                    app:strokeColor="@color/purple_500"
+                    app:strokeWidth="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
