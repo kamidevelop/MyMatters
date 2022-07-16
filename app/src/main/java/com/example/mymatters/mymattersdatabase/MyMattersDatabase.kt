@@ -2,7 +2,7 @@ package com.example.mymatters.mymattersdatabase
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-
+import kotlin.collections.*
 data class Person(val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
 
 class MyMattersDatabase{
@@ -20,6 +20,37 @@ class MyMattersDatabase{
                 database.insert("Family",null,contentValues)
                 database.close()
             }
+        }
+
+        fun readFamilyData(context: Context): List<Person> {
+            val listOfPersons: MutableList<Person> = mutableListOf()
+            val database : SQLiteDatabase = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if (database.isOpen) {
+                val curs = database.rawQuery("SELECT * FROM Family;", null)
+                if(curs.moveToFirst()) {
+                    listOfPersons.add(
+                        Person(
+                            curs.getString(1),
+                            curs.getString(2),
+                            curs.getDouble(3),
+                            curs.getDouble(4),
+                        )
+                    )
+                }
+                while (curs.moveToNext()) {
+                    listOfPersons.add(
+                        Person(
+                            curs.getString(1),
+                            curs.getString(2),
+                            curs.getDouble(3),
+                            curs.getDouble(4),
+                        )
+                    )
+                }
+                curs.close()
+                database.close()
+            }
+            return listOfPersons.toList()
         }
     }
 }
