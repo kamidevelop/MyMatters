@@ -52,5 +52,20 @@ class MyMattersDatabase{
             }
             return listOfPersons.toList()
         }
+
+        fun readFamilyPersonData(context: Context, personId: Int) : Person?{
+            val database : SQLiteDatabase = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen) {
+                val curs = database.rawQuery("SELECT * FROM Family WHERE id = $personId;",null)
+                if(curs.moveToFirst()){
+                    val person = Person(curs.getString(1),curs.getString(2),curs.getDouble(3), curs.getDouble(4))
+                    curs.close()
+                    database.close()
+                    return person
+                }
+                else database.close()
+            }
+            return null
+        }
     }
 }
