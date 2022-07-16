@@ -81,6 +81,14 @@ class MyMattersDatabase{
             }
         }
 
-        
+        fun deleteFamilyData(context: Context, personId : Int) : Int{
+            if(personId == -1) return -1
+            var database : SQLiteDatabase = context.openOrCreateDatabase(DATA_BASE_NAME, Context.MODE_PRIVATE, null)
+            if(database.isOpen){
+                database.delete("Family","id = ?", arrayOf(personId.toString()))
+                database.close()
+            }
+            return personId
+        }
     }
 }
