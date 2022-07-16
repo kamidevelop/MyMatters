@@ -67,5 +67,20 @@ class MyMattersDatabase{
             }
             return null
         }
+
+        fun updateFamilyData(context: Context, personId : Int, person: Person){
+            val database : SQLiteDatabase = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("name", person.personName)
+                contentValues.put("photoUri",person.photoUri)
+                contentValues.put("wallet",person.wallet)
+                contentValues.put("coinbox",person.coinbox)
+                database.update("Family", contentValues,"id = ?", arrayOf(personId.toString()))
+                database.close()
+            }
+        }
+
+        
     }
 }
