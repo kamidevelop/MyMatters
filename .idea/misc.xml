@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/.android/MyMatters/app/src/main/res/drawable/color_gradients.xml" value="0.176" />
         <entry key="..\:/.android/MyMatters/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
-        <entry key="..\:/.android/MyMatters/app/src/main/res/layout/fragment_family.xml" value="0.2" />
+        <entry key="..\:/.android/MyMatters/app/src/main/res/layout/fragment_family.xml" value="0.176" />
       </map>
     </option>
   </component>
