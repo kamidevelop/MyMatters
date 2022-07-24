@@ -145,5 +145,37 @@ class MyMattersDatabase{
             }
             return null
         }
+
+        fun readIncomesDataByDate(context: Context, date : String) : List<Income>{
+            val listOfIncomes = mutableListOf<Income>()
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen) {
+                val curs = database.rawQuery("SELECT * FROM Incomes WHERE date = '$date';", null)
+                if (curs.moveToFirst()) {
+                    listOfIncomes.add(
+                        Income(
+                            curs.getString(1),
+                            curs.getInt(2),
+                            curs.getDouble(6),
+                            curs.getString(4),
+                            curs.getString(5)
+                        ))
+                }
+                while (curs.moveToNext()) {
+                    listOfIncomes.add(
+                        Income(
+                            curs.getString(1),
+                            curs.getInt(2),
+                            curs.getDouble(6),
+                            curs.getString(4),
+                            curs.getString(5)
+                        ))
+                }
+                curs.close()
+                database.close()
+            }
+            return listOfIncomes
+        }
+
     }
 }
