@@ -4,8 +4,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import kotlin.collections.*
 data class Person(val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
-data class Income(val date : String, val who : String, val sum : Double, val where : String, val comment : String)
-data class Demand(val date : String, val who : String, val sum : Double, val from : String, val comment : String)
+data class Income(val date : String, val who : Int, val sum : Double, val where : String, val comment : String)
+data class Demand(val date : String, val who : Int, val sum : Double, val from : String, val comment : String)
 class MyMattersDatabase{
     companion object {
         const val DATA_BASE_NAME = "mymattersfinance.db"
@@ -90,6 +90,39 @@ class MyMattersDatabase{
                 database.close()
             }
             return personId
+        }
+
+        fun readIncomesData(context: Context) : List<Income>{
+            val listOfIncomes = mutableListOf<Income>()
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val curs = database.rawQuery("SELECT * FROM Incomes;", null)
+                if(curs.moveToFirst()) {
+                    listOfIncomes.add(
+                        Income(
+                            curs.getString(1),
+                            curs.getInt(2),
+                            curs.getDouble(6),
+                            curs.getString(4),
+                            curs.getString(5)
+                        )
+                    )
+                }
+                while (curs.moveToNext()) {
+                    listOfIncomes.add(
+                        Income(
+                            curs.getString(1),
+                            curs.getInt(2),
+                            curs.getDouble(6),
+                            curs.getString(4),
+                            curs.getString(5)
+                        )
+                    )
+                }
+                curs.close()
+                database.close()
+            }
+            return listOfIncomes
         }
     }
 }
