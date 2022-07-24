@@ -124,5 +124,26 @@ class MyMattersDatabase{
             }
             return listOfIncomes
         }
+
+        fun readIncomeData(context: Context, personId: Int) : Income?{
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val curs = database.rawQuery("SELECT * FROM Incomes WHERE who = "+personId+";",null)
+                if(curs.moveToFirst()){
+                    val income = Income(
+                        curs.getString(1),
+                        curs.getInt(2),
+                        curs.getDouble(6),
+                        curs.getString(4),
+                        curs.getString(5)
+                    )
+                    curs.close()
+                    database.close()
+                    return income
+                }
+                database.close()
+            }
+            return null
+        }
     }
 }
