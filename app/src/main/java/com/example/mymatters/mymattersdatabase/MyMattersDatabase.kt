@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import kotlin.collections.*
 data class Person(val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
 data class Income(val date : String, val who : String, val sum : Double, val where : String, val comment : String)
+data class Demand(val date : String, val who : String, val sum : Double, val from : String, val comment : String)
 class MyMattersDatabase{
     companion object {
         const val DATA_BASE_NAME = "mymattersfinance.db"
