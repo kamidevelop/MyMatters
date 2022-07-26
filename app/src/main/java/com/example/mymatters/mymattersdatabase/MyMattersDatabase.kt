@@ -177,5 +177,13 @@ class MyMattersDatabase{
             return listOfIncomes
         }
 
+        fun deleteIncomeData(context: Context, incomeId : Int){
+            if(incomeId == -1) return
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                database.delete("Incomes","id = $incomeId",null)
+                database.close()
+            }
+        }
     }
 }
