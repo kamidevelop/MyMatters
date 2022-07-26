@@ -217,5 +217,37 @@ class MyMattersDatabase{
             database.close()
             return listOfDemands.toList()
         }
+
+        fun readDemandsDataByDate(context: Context, date : String) : List<Demand> {
+            val listOfDemands = mutableListOf<Demand>()
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val curs = database.rawQuery("SELECT * FROM Demands WHERE dateOfDemand = '$date';", null)
+                if(curs.moveToFirst()) {
+                    listOfDemands.add(
+                        Demand(
+                            curs.getString(1),
+                            curs.getInt(2),
+                            curs.getDouble(3),
+                            curs.getString(4),
+                            curs.getString(5)
+                        )
+                    )
+                }
+                while (curs.moveToNext()) {
+                    listOfDemands.add(
+                        Demand(
+                            curs.getString(1),
+                            curs.getInt(2),
+                            curs.getDouble(3),
+                            curs.getString(4),
+                            curs.getString(5)
+                        )
+                    )
+                }
+            }
+            database.close()
+            return listOfDemands.toList()
+        }
     }
 }
