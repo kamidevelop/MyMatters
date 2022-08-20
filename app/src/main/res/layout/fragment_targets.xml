@@ -7,11 +7,11 @@
     android:background="@drawable/green_white_gradient"
     tools:context=".targets.TargetsFragment" >
 
-    <LinearLayout
-        android:id="@+id/targets_vertical_layout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/targets_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        tools:listitem="@null" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_new_target"
