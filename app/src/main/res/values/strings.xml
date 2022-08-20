@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyMatters</string>
+    <string name="title_press_for_edit">Нажмите чтобы редактировать</string>
+    <string name="title_information_here">Информация будет тут</string>
 </resources>
