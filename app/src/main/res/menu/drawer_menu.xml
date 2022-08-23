@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/title_finance">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:title="Семья" android:id="@+id/familyFragment" />
+                <item android:title="Доходы/Расходы" android:id="@+id/incomeDemandFragment"/>
+                <item android:title="Карточка дня" android:id="@+id/cardDayFragment"/>
+                <item android:title="Материальные цели" android:id="@+id/targetsFragment"/>
+            </group>
+        </menu>
+    </item>
+</menu>

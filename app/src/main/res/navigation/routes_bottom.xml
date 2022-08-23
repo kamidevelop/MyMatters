@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routes"
+    app:startDestination="@id/familyFragment">
+
+    <fragment
+        android:id="@+id/familyFragment"
+        android:name="com.example.mymatters.family.FamilyFragment"
+        android:label="fragment_family"
+        tools:layout="@layout/fragment_family">
+        <action
+            android:id="@+id/action_familyFragment_to_incomeDemandFragment"
+            app:destination="@id/incomeDemandFragment" />
+        <action
+            android:id="@+id/action_familyFragment_to_cardDayFragment"
+            app:destination="@id/cardDayFragment" />
+        <action
+            android:id="@+id/action_familyFragment_to_targetsFragment"
+            app:destination="@id/targetsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/incomeDemandFragment"
+        android:name="com.example.mymatters.incomedemand.IncomeDemandFragment"
+        android:label="fragment_income_demand"
+        tools:layout="@layout/fragment_income_demand">
+        <action
+            android:id="@+id/action_incomeDemandFragment_to_familyFragment"
+            app:destination="@id/familyFragment" />
+        <action
+            android:id="@+id/action_incomeDemandFragment_to_cardDayFragment"
+            app:destination="@id/cardDayFragment" />
+        <action
+            android:id="@+id/action_incomeDemandFragment_to_targetsFragment"
+            app:destination="@id/targetsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardDayFragment"
+        android:name="com.example.mymatters.cardday.CardDayFragment"
+        android:label="fragment_card_day"
+        tools:layout="@layout/fragment_card_day">
+        <action
+            android:id="@+id/action_cardDayFragment_to_incomeDemandFragment"
+            app:destination="@id/incomeDemandFragment" />
+        <action
+            android:id="@+id/action_cardDayFragment_to_familyFragment"
+            app:destination="@id/familyFragment" />
+        <action
+            android:id="@+id/action_cardDayFragment_to_targetsFragment"
+            app:destination="@id/targetsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/targetsFragment"
+        android:name="com.example.mymatters.targets.TargetsFragment"
+        android:label="fragment_targets"
+        tools:layout="@layout/fragment_targets">
+        <action
+            android:id="@+id/action_targetsFragment_to_cardDayFragment"
+            app:destination="@id/cardDayFragment" />
+        <action
+            android:id="@+id/action_targetsFragment_to_incomeDemandFragment"
+            app:destination="@id/incomeDemandFragment" />
+        <action
+            android:id="@+id/action_targetsFragment_to_familyFragment"
+            app:destination="@id/familyFragment" />
+    </fragment>
+</navigation>
