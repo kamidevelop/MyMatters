@@ -3,4 +3,8 @@
     <string name="title_press_for_edit">Нажмите чтобы редактировать</string>
     <string name="title_information_here">Информация будет тут</string>
     <string name="title_finance">Учёт финансов</string>
+    <string name="title_total_resources">Всего средств</string>
+    <string name="title_wallet">Кошельки</string>
+    <string name="title_coinbox">Копилки</string>
+    <string name="value_nan">-</string>
 </resources>
