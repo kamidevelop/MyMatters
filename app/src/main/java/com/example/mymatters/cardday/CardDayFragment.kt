@@ -1,5 +1,6 @@
 package com.example.mymatters.cardday
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,19 +11,41 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mymatters.R
-class CardDayPagerVH(itemView : View) : RecyclerView.ViewHolder(itemView)
+class CardDayRecycleVH(itemView: View) : RecyclerView.ViewHolder(itemView)
+class CardDayRecycleViewAdapter : RecyclerView.Adapter<CardDayRecycleVH>(){
 
-class CardDayViewPagerAdapter : RecyclerView.Adapter<CardDayPagerVH>(){
-    val texts = arrayListOf<CharSequence>("Тут будет рейтинг","Тут будут расходы","Тут будут доходы")
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDayPagerVH =
-        CardDayPagerVH(LayoutInflater.from(parent.context).inflate(R.layout.cardday_info_item,parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDayRecycleVH =
+        CardDayRecycleVH(LayoutInflater.from(parent.context).inflate(R.layout.cardday_info_category_item,parent,false))
 
-    override fun onBindViewHolder(holder: CardDayPagerVH, position: Int) = holder.itemView.run{
-        this.findViewById<TextView>(R.id.info_text).text = texts[position]
+    override fun onBindViewHolder(holder: CardDayRecycleVH, position: Int) {
+
     }
 
     override fun getItemCount(): Int {
-        return texts.size
+        return 0
+    }
+
+}
+
+class CardDayPagerVH(itemView : View) : RecyclerView.ViewHolder(itemView)
+
+class CardDayViewPagerAdapter : RecyclerView.Adapter<CardDayPagerVH>(){
+    private lateinit var _labelsArray: Array<String>
+    var labelsArray: Array<String>
+        get() = _labelsArray
+        set(value) {
+            _labelsArray = value
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDayPagerVH = CardDayPagerVH(
+            LayoutInflater.from(parent.context).inflate(R.layout.cardday_info_item, parent, false))
+
+    override fun onBindViewHolder(holder: CardDayPagerVH, position: Int) = holder.itemView.run{
+        this.findViewById<TextView>(R.id.info_text).text = labelsArray[position]
+    }
+
+    override fun getItemCount(): Int {
+        return labelsArray.size
     }
 
 }
@@ -41,7 +64,9 @@ class CardDayFragment : Fragment() {
     ): View? {
         val inf = inflater.inflate(R.layout.fragment_card_day, container, false)
         val vp = inf.findViewById<ViewPager2>(R.id.cardday_info_viewpager)
-        vp.adapter = CardDayViewPagerAdapter()
+        val cdAdapter = CardDayViewPagerAdapter()
+        cdAdapter.labelsArray = resources.getStringArray(R.array.titles_cardday)
+        vp.adapter = cdAdapter
         return inf
     }
 
