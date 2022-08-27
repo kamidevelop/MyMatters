@@ -15,4 +15,7 @@
     </string-array>
     <string name="value_nan">-</string>
     <string name="title_input_name">Введите имя</string>
+    <string name="title_add_in_family">Добавить в семью</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_cancel">Отмена</string>
 </resources>
