@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mymatters.R
 
+class FamilyViewPager
+
 class FamilyFragment : Fragment() {
 
     companion object {

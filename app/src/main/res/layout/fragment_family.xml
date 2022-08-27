@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_green"
+    android:background="@drawable/green_white_gradient"
     tools:context=".family.FamilyFragment">
 
     <LinearLayout
@@ -12,79 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <HorizontalScrollView
-            android:id="@+id/horizontal_scroll_card"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/person_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="240dp">
+            android:layout_height="wrap_content" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardView"
-                    android:layout_width="356dp"
-                    android:layout_height="170dp"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:strokeColor="@color/green"
-                    app:strokeWidth="2dp" >
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/title_press_for_edit"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </HorizontalScrollView>
-
-        <ScrollView
-            android:id="@+id/vertical_scroll_info"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/info_person_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/green_white_gradient">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="356dp"
-                    android:layout_height="469dp"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/title_information_here" />
-                </androidx.cardview.widget.CardView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
-
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
