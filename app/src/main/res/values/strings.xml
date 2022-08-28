@@ -18,4 +18,8 @@
     <string name="title_add_in_family">Добавить в семью</string>
     <string name="button_save">Сохранить</string>
     <string name="button_cancel">Отмена</string>
+    <string name="title_lower_to">в</string>
+    <string name="title_lower_from">из</string>
+    <string name="title_income">Доход</string>
+    <string name="title_demand">Расход</string>
 </resources>

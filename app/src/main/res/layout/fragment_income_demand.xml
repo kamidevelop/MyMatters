@@ -12,11 +12,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <CalendarView
-            android:id="@+id/calendar_view"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:dateTextAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            app:cardCornerRadius="10dp">
+
+            <CalendarView
+                android:id="@+id/calendar_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dateTextAppearance="@style/TextAppearance.AppCompat.Large" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/income_demand_viewpager"
