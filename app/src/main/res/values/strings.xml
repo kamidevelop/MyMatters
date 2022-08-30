@@ -22,4 +22,8 @@
     <string name="title_lower_from">из</string>
     <string name="title_income">Доход</string>
     <string name="title_demand">Расход</string>
+    <string name="title_date">Дата</string>
+    <string name="title_sum">Сумма</string>
+    <string name="title_comment">Комментарий</string>
+    <string name="title_category">Категория</string>
 </resources>
