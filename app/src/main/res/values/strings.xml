@@ -26,4 +26,7 @@
     <string name="title_sum">Сумма</string>
     <string name="title_comment">Комментарий</string>
     <string name="title_category">Категория</string>
+    <string name="title_target_name">Имя цели</string>
+    <string name="title_in_progress">В процессе</string>
+    <string name="title_completed">Достигнута</string>
 </resources>
