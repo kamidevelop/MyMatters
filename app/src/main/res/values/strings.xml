@@ -29,4 +29,6 @@
     <string name="title_target_name">Имя цели</string>
     <string name="title_in_progress">В процессе</string>
     <string name="title_completed">Достигнута</string>
+    <string name="title_end_sum">Конечная сумма</string>
+    <string name="title_current_sum">Текущая сумма</string>
 </resources>
