@@ -31,4 +31,5 @@
     <string name="title_completed">Достигнута</string>
     <string name="title_end_sum">Конечная сумма</string>
     <string name="title_current_sum">Текущая сумма</string>
+    <string name="title_create_target">Создать цель</string>
 </resources>
