@@ -2,6 +2,7 @@ package com.example.mymatters.mymattersdatabase
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import androidx.core.content.contentValuesOf
 import kotlin.collections.*
 data class Person(val id : Int, val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
 data class Income(val id : Int, val date : String, val who : Int, val sum : Double, val where : String, val comment : String)
@@ -308,6 +309,18 @@ class MyMattersDatabase{
             return listOfDemands.toList()
         }
 
-
+        fun writeTargetData(context: Context,target: Target){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("photoUri",target.photoUri)
+                contentValues.put("name",target.name)
+                contentValues.put("endSum",target.endSum)
+                contentValues.put("currentSum",target.currentSum)
+                database.insert("Targets",null,contentValues)
+                database.close()
+            }
+        }
+        
     }
 }
