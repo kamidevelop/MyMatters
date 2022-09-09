@@ -3,9 +3,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import kotlin.collections.*
-data class Person(val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
-data class Income(val date : String, val who : Int, val sum : Double, val where : String, val comment : String)
-data class Demand(val date : String, val who : Int, val sum : Double, val from : String, val comment : String)
+data class Person(val id : Int, val personName : String, val photoUri : String, val wallet : Double, val coinbox : Double)
+data class Income(val id : Int, val date : String, val who : Int, val sum : Double, val where : String, val comment : String)
+data class Demand(val id : Int, val date : String, val who : Int, val sum : Double, val from : String, val category : String)
+data class Target(val id : Int, val photoUri: String, val name : String, val endSum : Double, val currentSum : Double)
+
 class MyMattersDatabase{
     companion object {
         const val DATA_BASE_NAME = "mymattersfinance.db"
@@ -30,7 +32,7 @@ class MyMattersDatabase{
                 val curs = database.rawQuery("SELECT * FROM Family;", null)
                 if(curs.moveToFirst()) {
                     listOfPersons.add(
-                        Person(
+                        Person(curs.getInt(0),
                             curs.getString(1),
                             curs.getString(2),
                             curs.getDouble(3),
@@ -40,7 +42,7 @@ class MyMattersDatabase{
                 }
                 while (curs.moveToNext()) {
                     listOfPersons.add(
-                        Person(
+                        Person(curs.getInt(0),
                             curs.getString(1),
                             curs.getString(2),
                             curs.getDouble(3),
@@ -59,7 +61,7 @@ class MyMattersDatabase{
             if(database.isOpen) {
                 val curs = database.rawQuery("SELECT * FROM Family WHERE id = $personId;",null)
                 if(curs.moveToFirst()){
-                    val person = Person(curs.getString(1),curs.getString(2),curs.getDouble(3), curs.getDouble(4))
+                    val person = Person(curs.getInt(0),curs.getString(1),curs.getString(2),curs.getDouble(3), curs.getDouble(4))
                     curs.close()
                     database.close()
                     return person
@@ -92,6 +94,34 @@ class MyMattersDatabase{
             return personId
         }
 
+        fun writeIncomeData(context: Context, income: Income){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME, Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("date",income.date)
+                contentValues.put("who",income.who)
+                contentValues.put("sum",income.sum)
+                contentValues.put("where",income.where)
+                contentValues.put("comment",income.comment)
+                database.insert("Income",null,contentValues)
+                database.close()
+            }
+        }
+
+        fun updateIncomeData(context: Context, income: Income){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME, Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("date",income.date)
+                contentValues.put("who",income.who)
+                contentValues.put("sum",income.sum)
+                contentValues.put("where",income.where)
+                contentValues.put("comment",income.comment)
+                database.update("Income",contentValues,"id = '${income.id}'",null)
+                database.close()
+            }
+        }
+
         fun readIncomesData(context: Context) : List<Income>{
             val listOfIncomes = mutableListOf<Income>()
             val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
@@ -99,7 +129,7 @@ class MyMattersDatabase{
                 val curs = database.rawQuery("SELECT * FROM Incomes;", null)
                 if(curs.moveToFirst()) {
                     listOfIncomes.add(
-                        Income(
+                        Income(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(6),
@@ -110,7 +140,7 @@ class MyMattersDatabase{
                 }
                 while (curs.moveToNext()) {
                     listOfIncomes.add(
-                        Income(
+                        Income(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(6),
@@ -130,7 +160,7 @@ class MyMattersDatabase{
             if(database.isOpen){
                 val curs = database.rawQuery("SELECT * FROM Incomes WHERE who = "+personId+";",null)
                 if(curs.moveToFirst()){
-                    val income = Income(
+                    val income = Income(curs.getInt(0),
                         curs.getString(1),
                         curs.getInt(2),
                         curs.getDouble(6),
@@ -153,7 +183,7 @@ class MyMattersDatabase{
                 val curs = database.rawQuery("SELECT * FROM Incomes WHERE date = '$date';", null)
                 if (curs.moveToFirst()) {
                     listOfIncomes.add(
-                        Income(
+                        Income(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(6),
@@ -163,7 +193,7 @@ class MyMattersDatabase{
                 }
                 while (curs.moveToNext()) {
                     listOfIncomes.add(
-                        Income(
+                        Income(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(6),
@@ -186,6 +216,34 @@ class MyMattersDatabase{
             }
         }
 
+        fun writeDemandData(context: Context, demand: Demand){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("date",demand.date)
+                contentValues.put("who",demand.who)
+                contentValues.put("sum",demand.sum)
+                contentValues.put("from",demand.from)
+                contentValues.put("category",demand.category)
+                database.insert("Demand",null,contentValues)
+                database.close()
+            }
+        }
+
+        fun updateDemandData(context: Context, demand: Demand){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("date",demand.date)
+                contentValues.put("who",demand.who)
+                contentValues.put("sum",demand.sum)
+                contentValues.put("from",demand.from)
+                contentValues.put("category",demand.category)
+                database.update("Demand",contentValues,"id = '${demand.id}'",null)
+                database.close()
+            }
+        }
+
         fun readDemandsData(context: Context) : List<Demand>{
             val listOfDemands = mutableListOf<Demand>()
             val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
@@ -193,7 +251,7 @@ class MyMattersDatabase{
                 val curs = database.rawQuery("SELECT * FROM Demands;", null)
                 if(curs.moveToFirst()) {
                     listOfDemands.add(
-                        Demand(
+                        Demand(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(3),
@@ -204,7 +262,7 @@ class MyMattersDatabase{
                 }
                 while (curs.moveToNext()) {
                     listOfDemands.add(
-                        Demand(
+                        Demand(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(3),
@@ -225,7 +283,7 @@ class MyMattersDatabase{
                 val curs = database.rawQuery("SELECT * FROM Demands WHERE dateOfDemand = '$date';", null)
                 if(curs.moveToFirst()) {
                     listOfDemands.add(
-                        Demand(
+                        Demand(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(3),
@@ -236,7 +294,7 @@ class MyMattersDatabase{
                 }
                 while (curs.moveToNext()) {
                     listOfDemands.add(
-                        Demand(
+                        Demand(curs.getInt(0),
                             curs.getString(1),
                             curs.getInt(2),
                             curs.getDouble(3),
@@ -249,5 +307,7 @@ class MyMattersDatabase{
             database.close()
             return listOfDemands.toList()
         }
+
+
     }
 }
