@@ -102,7 +102,7 @@ class MyMattersDatabase{
                 contentValues.put("date",income.date)
                 contentValues.put("who",income.who)
                 contentValues.put("sum",income.sum)
-                contentValues.put("where",income.where)
+                contentValues.put("wher",income.where)
                 contentValues.put("comment",income.comment)
                 database.insert("Income",null,contentValues)
                 database.close()
@@ -116,7 +116,7 @@ class MyMattersDatabase{
                 contentValues.put("date",income.date)
                 contentValues.put("who",income.who)
                 contentValues.put("sum",income.sum)
-                contentValues.put("where",income.where)
+                contentValues.put("wher",income.where)
                 contentValues.put("comment",income.comment)
                 database.update("Income",contentValues,"id = '${income.id}'",null)
                 database.close()
@@ -224,7 +224,7 @@ class MyMattersDatabase{
                 contentValues.put("date",demand.date)
                 contentValues.put("who",demand.who)
                 contentValues.put("sum",demand.sum)
-                contentValues.put("from",demand.from)
+                contentValues.put("fro",demand.from)
                 contentValues.put("category",demand.category)
                 database.insert("Demand",null,contentValues)
                 database.close()
@@ -238,7 +238,7 @@ class MyMattersDatabase{
                 contentValues.put("date",demand.date)
                 contentValues.put("who",demand.who)
                 contentValues.put("sum",demand.sum)
-                contentValues.put("from",demand.from)
+                contentValues.put("fro",demand.from)
                 contentValues.put("category",demand.category)
                 database.update("Demand",contentValues,"id = '${demand.id}'",null)
                 database.close()
@@ -339,7 +339,7 @@ class MyMattersDatabase{
             val targets = mutableListOf<Target>()
             val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
             if(database.isOpen){
-                val curs = database.rawQuery("SELECT * FROM Tragets;",null)
+                val curs = database.rawQuery("SELECT * FROM Targets;",null)
                 if(curs.moveToFirst()){
                     targets.add(Target(
                         curs.getInt(0),
@@ -360,6 +360,24 @@ class MyMattersDatabase{
                 }
             }
             return targets
+        }
+
+        fun deleteTargetData(context: Context, targetId : Int){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                database.delete("Targets","id = '$targetId'",null)
+                database.close()
+            }
+        }
+
+        fun initialize(context: Context){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                database.execSQL("CREATE TABLE IF NOT EXISTS Family(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, photoUri TEXT, wallet REAL, coinbox REAL);")
+                database.execSQL("CREATE TABLE IF NOT EXISTS Incomes(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, who TEXT, sum REAL, wher TEXT, comment TEXT);")
+                database.execSQL("CREATE TABLE IF NOT EXISTS Demands(id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, who TEXT, sum REAL, fro TEXT, category TEXT);")
+                database.execSQL("CREATE TABLE IF NOT EXISTS Targets(id INTEGER PRIMARY KEY AUTOINCREMENT, photoUri TEXT, name TEXT, endSum REAL, currentSum REAL);")
+            }
         }
     }
 }
