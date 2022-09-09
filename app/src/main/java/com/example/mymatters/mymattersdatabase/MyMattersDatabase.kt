@@ -334,5 +334,32 @@ class MyMattersDatabase{
                 database.close()
             }
         }
+
+        fun readTargetsData(context: Context) : List<Target>{
+            val targets = mutableListOf<Target>()
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val curs = database.rawQuery("SELECT * FROM Tragets;",null)
+                if(curs.moveToFirst()){
+                    targets.add(Target(
+                        curs.getInt(0),
+                        curs.getString(1),
+                        curs.getString(2),
+                        curs.getDouble(3),
+                        curs.getDouble(4)
+                    ))
+                }
+                while(curs.moveToNext()){
+                    targets.add(Target(
+                        curs.getInt(0),
+                        curs.getString(1),
+                        curs.getString(2),
+                        curs.getDouble(3),
+                        curs.getDouble(4)
+                    ))
+                }
+            }
+            return targets
+        }
     }
 }
