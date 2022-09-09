@@ -321,6 +321,18 @@ class MyMattersDatabase{
                 database.close()
             }
         }
-        
+
+        fun updateTargetData(context: Context,target: Target){
+            val database = context.openOrCreateDatabase(DATA_BASE_NAME,Context.MODE_PRIVATE,null)
+            if(database.isOpen){
+                val contentValues = ContentValues()
+                contentValues.put("photoUri",target.photoUri)
+                contentValues.put("name",target.name)
+                contentValues.put("endSum",target.endSum)
+                contentValues.put("currentSum",target.currentSum)
+                database.update("Targets",contentValues,"id = '${target.id}'",null)
+                database.close()
+            }
+        }
     }
 }
